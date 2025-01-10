@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f2f9f6;
+    }
+
+    h2, h5 {
+        text-align: center;
+        margin-top: 20px;
+        color: #3b6c53;
+    }
+
+    form {
+        margin-top: 2%;
+        margin-left: 18%;
+        margin-right: 21%;
+    }
+
+    fieldset {
+        padding: 40px;
+        border-width: 20px;
+        border-style: groove;
+        border-color: #3b6c53;
+        background-color: #e0f1e6;
+    }
+
+    label {
+        margin-left: 40px;
+        padding: 10px;
+        font-size: 20px;
+        display: inline-block;
+        width: 240px;
+        color: #3b6c53;
+    }
+
+    input, select {
+        padding: 8px;
+        color: #4a7f62;
+        width: 70%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    button {
+        margin-left: 40px;
+        color: #fff;
+        background-color: #3b6c53;
+        border-radius: 3px;
+        padding: 13px 39px;
+        text-align: center;
+        letter-spacing: 0.9px;
+        text-decoration: none;
+        margin-right: 10px;
+        line-height: 26px;
+        font-size: 16px;
+        box-shadow: 0px 1px 3px 0px #3b6c53;
+        margin-top: 15px;
+        border: none;
+    }
+
+    .btn-edit {
+        background-color: #3b6c53;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+
+    .btn-edit:hover {
+        background-color: #2a4d38;
+        color: white;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        border: 1px solid #3b6c53;
+        padding: 8px;
+        text-align: left;
+        color: #3b6c53;
+    }
+
+    .table th {
+        background-color: #c1e2c7;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+</style>
+
+<h2>Staff Module Allocation</h2>
+<h5>Allocate modules to staff or upload a CSV file for bulk allocation</h5>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset>
+        <label for="staff">Staff:</label>
+        <select name="staff" id="staff" required>
+            <option value="">Select Staff</option>
+            {% for s in staff %}
+                <option value="{{ s.staff_id }}">{{ s.staff_name }} ({{ s.staff_title }})</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="module">Module:</label>
+        <select name="module" id="module" required>
+            <option value="">Select Module</option>
+            {% for m in modules %}
+                <option value="{{ m.module_id }}">{{ m.module_code }} - {{ m.module_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="semester">Semester:</label>
+        <input type="number" name="semester" id="semester" min="1" max="2">
+        <br>
+        <label for="academic_year">Academic Year:</label>
+        <input type="number" name="academic_year" id="academic_year" min="2000" max="2100">
+        <br>
+        <label for="csv_file">Upload CSV File:</label>
+        <input type="file" name="csv_file" id="csv_file" accept=".csv">
+        <br>
+        <button type="submit">Allocate Module</button>
+    </fieldset>
+</form>
+
+<h2>Current Allocations</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Staff</th>
+                <th>Module Code</th>
+                <th>Module Name</th>
+                <th>Department Name</th>
+                <th>Module Type</th>
+                <th>Year</th>
+                <th>Semester</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for allocation in allocations %}
+            <tr>
+                <td>{{ allocation.staff.staff_name }}</td>
+                <td>{{ allocation.module.module_code }}</td>
+                <td>{{ allocation.module.module_name }}</td>
+                <td>{{ allocation.module.dept_name }}</td>
+                <td>{{ allocation.module.module_type }}</td>
+                <td>{{ allocation.module.module_year }}</td>
+                <td>{{ allocation.semester }}</td>
+                <td>
+                    <a href="{% url 'editmodule' allocation.module.module_code %}" class="btn-edit">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'AddModules' %}" class="btn btn-primary submit" onclick="openPage('new')">Back to Add Modules</a>
+</div>
+{% endblock %}

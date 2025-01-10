@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <style>
+        body {
+            background-color: #ebfffa;
+        }
+
+        nav {
+            font-family: sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        h2, h5 {
+            text-align: center;
+            color: #257a7a;
+        }
+
+        form {
+            margin-top: 2%;
+            margin-left: 18%;
+            margin-right: 21%;
+        }
+
+        form fieldset {
+            padding: 40px;
+            border-width: 20px;
+            border-style: groove;
+            border-color: #257a7a;
+            background-color: #fff;
+        }
+
+        fieldset label {
+            margin-left: 40px;
+            padding: 23px;
+            font-size: 20px;
+            display: inline-block;
+            width: 240px;
+        }
+
+        fieldset input, fieldset textarea, fieldset select {
+            padding: 8px;
+            color: #938c8c;
+            width: 70%;
+            margin-left: 40px;
+            margin-bottom: 15px;
+        }
+
+        fieldset input:focus, fieldset textarea:focus, fieldset select:focus {
+            color: #000;
+        }
+
+        fieldset button, .submit {
+            margin-left: 60px;
+            color: #fff;
+            background-color: #257a7a;
+            border-radius: 3px;
+            padding: 13px 39px;
+            text-align: center;
+            letter-spacing: 0.9px;
+            text-decoration: none;
+            margin-right: 10px;
+            line-height: 30px;
+            font-size: 16px;
+            box-shadow: 0px 1px 3px 0px #257a7a;
+            margin-top: 15px;
+        }
+
+        .fieldset {
+            margin-top: 3%;
+            margin-left: 18%;
+            margin-right: 12%;
+            padding: 50px;
+            border-width: 25px;
+            border-style: ridge;
+            border-color: #257a7a;
+            box-shadow: 6px 13px 13px 0px black;
+            background-color: #ebfffa;
+        }
+
+        .csv-upload {
+            margin-top: 20px;
+            margin-left: 60px;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#"><b>SACAS TIMETABLE GENERATOR</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+               
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item active"><a class="nav-link">|</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, {{ user.first_name }}</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown03">
+                         
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <br><br>
+    <h2>Add Departments</h2>
+    <h5>Please use the following form to enter the Departments into the system for timetable generation</h5>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="fieldset">
+            <div>
+                <label for="dept_name">Department Name</label>
+                <input type="text" id="dept_name" name="dept_name" required>
+
+                <label for="dept_descr">Description</label>
+                <textarea id="dept_descr" name="dept_descr"></textarea>
+
+                <label for="hod">Head of Department</label>
+                <input type="text" id="hod" name="hod">
+
+                <label for="hod_phone">HOD Phone</label>
+                <input type="text" id="hod_phone" name="hod_phone">
+
+                <label for="hod_email">HOD Email</label>
+                <input type="email" id="hod_email" name="hod_email">
+
+                <button type="submit" class="submit">Add Department</button>
+            </div>
+
+            <div class="csv-upload">
+                <h5>Or Upload CSV File</h5>
+                <input type="file" name="csv_file" accept=".csv">
+                <button type="submit" class="submit">Upload CSV</button>
+            </div>
+
+            <div>
+                <a href="{% url 'department_list' %}" class="submit">View / Edit Departments</a>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Staff</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">  
+</head>
+
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#"><b>SACAS TIMETABLE GENERATOR</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link">|</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, {{ user.first_name }}</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown03">
+                           
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Add Staff</h2>
+        <h5>Please use the following form to enter the Teachers into the system for timetable generation</h5>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                <div class="form-group">
+                    <label for="staff_name">Staff Name</label>
+                    <input type="text" class="form-control" id="staff_name" name="staff_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="rfid_id">RFID ID</label>
+                    <input type="text" class="form-control" id="rfid_id" name="rfid_id">
+                </div>
+                <div class="form-group">
+                    <label for="staff_email">Staff Email</label>
+                    <input type="email" class="form-control" id="staff_email" name="staff_email">
+                </div>
+                <div class="form-group">
+                    <label for="staff_phone">Staff Phone</label>
+                    <input type="text" class="form-control" id="staff_phone" name="staff_phone">
+                </div>
+                <div class="form-group">
+                    <label for="staff_type">Staff Type</label>
+                    <input type="text" class="form-control" id="staff_type" name="staff_type">
+                </div>
+                <div class="form-group">
+                    <label for="staff_title">Staff Title</label>
+                    <input type="text" class="form-control" id="staff_title" name="staff_title">
+                </div>
+                <div class="form-group">
+                    <label for="dept_id">Department ID</label>
+                    <input type="number" class="form-control" id="dept_id" name="dept_id">
+                </div>
+                <div class="form-group">
+                    <label for="dept_name">Department Name</label>
+                    <input type="text" class="form-control" id="dept_name" name="dept_name">
+                </div>
+                <div class="form-group">
+                    <label for="csv_file">Upload CSV File</label>
+                    <input type="file" class="form-control-file" id="csv_file" name="csv_file" accept=".csv">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Staff</button>
+                
+            </fieldset>
+        </form>
+        <a href="{{ view_staff_url }}" class="btn btn-secondary">View/Edit Staff</a>
+    </div>
+</body>
+
+</html>

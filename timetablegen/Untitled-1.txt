@@ -1,0 +1,10 @@
+hello we will be changing the generator code by followinng these constraints 
+1. the start time of the timeatble will be 0800 hours adn the end time will be 17000 hours
+2. and the preiod of which the module will take time will be 2 hours or 2 and half hours or 3 hours
+ 4.we wil have 2 breaks in which one wll be  will be from 1000 to 1130 and another will be from 1300 to 1430 and the period swll be over by the 17000
+
+ a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+ 
+ 
+ 
+ <a class="dropdown<-item" href="{% url 'logout' %}">Logout</a>
