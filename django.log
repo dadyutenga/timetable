@@ -1,0 +1,278 @@
+nohup: ignoring input
+Watching for file changes with StatReloader
+[12/Jan/2025 12:44:09] "GET / HTTP/1.1" 200 5846
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 12:44:09] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+[12/Jan/2025 12:44:09] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 12:44:10] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+Not Found: /favicon.ico
+[12/Jan/2025 12:44:10] "GET /favicon.ico HTTP/1.1" 404 7488
+[12/Jan/2025 12:48:56] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 12:48:57] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 12:48:57] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 13:07:30] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 13:07:30] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 13:07:30] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 13:07:31] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 13:07:31] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 13:07:39] "GET /add_modules/ HTTP/1.1" 200 8064
+Not Found: /add_modules/static/css/index.css
+[12/Jan/2025 13:07:40] "GET /add_modules/static/css/index.css HTTP/1.1" 404 7551
+[12/Jan/2025 13:11:12] "GET / HTTP/1.0" 200 5846
+Internal Server Error: /generate_timetable/
+Traceback (most recent call last):
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/sacas/timetable/timetablegen/views.py", line 261, in generate_timetable_view
+    return render(request, 'generate.html', {'departments': departments})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/template/defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'generate_timetable' not found. 'generate_timetable' is not a valid view function or pattern name.
+[12/Jan/2025 13:15:48] "GET /generate_timetable/ HTTP/1.1" 500 111270
+[12/Jan/2025 13:15:53] "GET /add_departments/ HTTP/1.1" 200 5592
+[12/Jan/2025 13:35:15] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[12/Jan/2025 13:35:26] "GET /favicon.ico HTTP/1.1" 404 7488
+Invalid HTTP_HOST header: 'api.ipify.org'. You may need to add 'api.ipify.org' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'api.ipify.org'. You may need to add 'api.ipify.org' to ALLOWED_HOSTS.
+Bad Request: /http:/api.ipify.org/
+[12/Jan/2025 13:35:29] "GET http://api.ipify.org/?format=json HTTP/1.1" 400 63580
+Invalid HTTP_HOST header: 'www.shadowserver.org'. You may need to add 'www.shadowserver.org' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'www.shadowserver.org'. You may need to add 'www.shadowserver.org' to ALLOWED_HOSTS.
+Bad Request: /www.shadowserver.org:443
+[12/Jan/2025 13:35:31] "CONNECT www.shadowserver.org:443 HTTP/1.1" 400 63783
+[12/Jan/2025 14:21:02] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ò\x8ak®¥\x93¦Ñ\\¿Ó_\x8a¨ß\x9eñF¯{Ít¼{ì)n\x03C:J6\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[12/Jan/2025 14:21:02] You're accessing the development server over HTTPS, but it only supports HTTP.
+[12/Jan/2025 14:48:41] "GET / HTTP/1.1" 200 5846
+Invalid HTTP_HOST header: '112.124.42.80:63435'. You may need to add '112.124.42.80' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '112.124.42.80:63435'. You may need to add '112.124.42.80' to ALLOWED_HOSTS.
+Bad Request: /http:/112.124.42.80:63435/
+[12/Jan/2025 15:08:29] "HEAD http://112.124.42.80:63435/ HTTP/1.1" 400 0
+[12/Jan/2025 15:51:05] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 15:53:04] "GET / HTTP/1.0" 200 5846
+Not Found: /.env
+[12/Jan/2025 16:35:07] "GET /.env HTTP/1.1" 404 7467
+[12/Jan/2025 17:16:03] "GET /add_departments/ HTTP/1.1" 200 5592
+Not Found: /favicon.ico
+[12/Jan/2025 17:16:08] "GET /favicon.ico HTTP/1.1" 404 7488
+[12/Jan/2025 17:27:49] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 17:27:50] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 17:27:50] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 17:40:30] "GET /add_modules/ HTTP/1.1" 200 8064
+Not Found: /add_modules/static/css/index.css
+[12/Jan/2025 17:40:30] "GET /add_modules/static/css/index.css HTTP/1.1" 404 7551
+[12/Jan/2025 17:40:32] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 17:40:33] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 17:40:33] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 17:40:35] "GET /add_modules/ HTTP/1.1" 200 8064
+Not Found: /add_modules/static/css/index.css
+[12/Jan/2025 17:40:36] "GET /add_modules/static/css/index.css HTTP/1.1" 404 7551
+[12/Jan/2025 17:40:40] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 17:40:40] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 17:40:40] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 18:42:56] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 18:42:56] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 18:42:57] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+Not Found: /favicon.ico
+[12/Jan/2025 18:42:57] "GET /favicon.ico HTTP/1.1" 404 7488
+[12/Jan/2025 18:43:09] "GET /add_modules/ HTTP/1.1" 200 8064
+Not Found: /add_modules/static/css/index.css
+[12/Jan/2025 18:43:09] "GET /add_modules/static/css/index.css HTTP/1.1" 404 7551
+Internal Server Error: /edit_course/
+Traceback (most recent call last):
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/views/generic/edit.py", line 201, in get
+    self.object = self.get_object()
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/views/generic/detail.py", line 46, in get_object
+    raise AttributeError(
+AttributeError: Generic detail view EditModuleView must be called with either an object pk or a slug in the URLconf.
+[12/Jan/2025 18:43:20] "GET /edit_course/ HTTP/1.1" 500 74647
+[12/Jan/2025 19:32:50,976] - Broken pipe from ('162.142.125.201', 36998)
+[12/Jan/2025 19:32:54] "GET / HTTP/1.1" 200 5846
+[12/Jan/2025 19:32:54,555] - Broken pipe from ('162.142.125.201', 33130)
+[12/Jan/2025 19:32:58] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[12/Jan/2025 19:32:58] "GET /favicon.ico HTTP/1.1" 404 7488
+[12/Jan/2025 19:32:59] code 505, message Invalid HTTP version (2.0)
+[12/Jan/2025 19:32:59] "PRI * HTTP/2.0" 505 -
+[12/Jan/2025 20:40:58] "GET / HTTP/1.1" 200 5846
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 20:40:59] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 20:40:59] "GET /static/css/aboutus.css HTTP/1.1" 404 1808
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[12/Jan/2025 20:41:00] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+[12/Jan/2025 21:12:21] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[12/Jan/2025 21:12:22] "GET /favicon.ico HTTP/1.1" 404 7488
+[12/Jan/2025 21:44:24] "GET / HTTP/1.0" 200 5846
+[13/Jan/2025 01:04:49] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[13/Jan/2025 01:04:49] "  /*à     Cookie: mstshash=Administr" 400 -
+[13/Jan/2025 01:26:11] code 400, message Bad request syntax ('\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x03æÉ\x88u¸âéÝqü\x98¹v+yo\x95\x9d\x92®\x0eàB\x16')
+[13/Jan/2025 01:26:11] You're accessing the development server over HTTPS, but it only supports HTTP.
+[13/Jan/2025 01:26:36,313] - Broken pipe from ('206.168.34.69', 46864)
+[13/Jan/2025 01:26:57] code 400, message Bad request syntax ('ZG\x00\x00\x00\x05\x00+\x0e\x01\x00')
+[13/Jan/2025 01:26:57] "ZG    + " 400 -
+[13/Jan/2025 03:00:45] "GET / HTTP/1.1" 200 5846
+[13/Jan/2025 05:04:03] "GET / HTTP/1.1" 200 5846
+[13/Jan/2025 05:34:27] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[13/Jan/2025 05:34:30] "GET /favicon.ico HTTP/1.1" 404 7488
+Not Found: /assets/js/vendor/jquery.slim.min.js
+[13/Jan/2025 05:34:31] "GET /assets/js/vendor/jquery.slim.min.js HTTP/1.1" 404 7560
+[13/Jan/2025 08:45:49,449] - Broken pipe from ('167.94.146.49', 56848)
+[13/Jan/2025 08:45:52] "GET / HTTP/1.1" 200 5846
+[13/Jan/2025 08:45:52,626] - Broken pipe from ('167.94.146.49', 56964)
+[13/Jan/2025 08:45:55] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[13/Jan/2025 08:45:55] "GET /favicon.ico HTTP/1.1" 404 7488
+[13/Jan/2025 08:45:55] code 505, message Invalid HTTP version (2.0)
+[13/Jan/2025 08:45:55] "PRI * HTTP/2.0" 505 -
+Not Found: /assets/dist/js/bootstrap.bundle.js
+[13/Jan/2025 09:12:05] "GET /assets/dist/js/bootstrap.bundle.js HTTP/1.1" 404 7557
+Not Found: /favicon.ico
+[13/Jan/2025 09:12:06] "GET /favicon.ico HTTP/1.1" 404 7488
+[13/Jan/2025 10:47:43] code 400, message Bad request version ('À\x13À')
+[13/Jan/2025 10:47:43] You're accessing the development server over HTTPS, but it only supports HTTP.
+[13/Jan/2025 10:57:27] "GET / HTTP/1.0" 200 5846
+[13/Jan/2025 12:28:05,943] - Broken pipe from ('167.94.146.53', 41548)
+[13/Jan/2025 12:28:09] "GET / HTTP/1.1" 200 5846
+[13/Jan/2025 12:28:09,445] - Broken pipe from ('167.94.146.53', 41568)
+[13/Jan/2025 12:28:12] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[13/Jan/2025 12:28:14] "GET /favicon.ico HTTP/1.1" 404 7488
+[13/Jan/2025 12:28:14] code 505, message Invalid HTTP version (2.0)
+[13/Jan/2025 12:28:14] "PRI * HTTP/2.0" 505 -
+[13/Jan/2025 14:45:30] "GET / HTTP/1.0" 200 5846
+[13/Jan/2025 15:41:59] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[13/Jan/2025 15:42:06] "GET /favicon.ico HTTP/1.1" 404 7488
+Invalid HTTP_HOST header: 'api.ipify.org'. You may need to add 'api.ipify.org' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'api.ipify.org'. You may need to add 'api.ipify.org' to ALLOWED_HOSTS.
+Bad Request: /http:/api.ipify.org/
+[13/Jan/2025 15:42:11] "GET http://api.ipify.org/?format=json HTTP/1.1" 400 63550
+Invalid HTTP_HOST header: 'www.shadowserver.org'. You may need to add 'www.shadowserver.org' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/dadi/.local/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'www.shadowserver.org'. You may need to add 'www.shadowserver.org' to ALLOWED_HOSTS.
+Bad Request: /www.shadowserver.org:443
+[13/Jan/2025 15:42:14] "CONNECT www.shadowserver.org:443 HTTP/1.1" 400 63753
+[13/Jan/2025 19:50:50] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[13/Jan/2025 19:50:50] "  /*à     Cookie: mstshash=Administr" 400 -
+[13/Jan/2025 20:08:17,086] - Broken pipe from ('199.45.154.120', 33632)
+[13/Jan/2025 20:08:20] "GET / HTTP/1.1" 200 5846
+[13/Jan/2025 20:08:20,837] - Broken pipe from ('199.45.154.120', 60980)
+[13/Jan/2025 20:08:25] "GET / HTTP/1.1" 200 5846
+Not Found: /favicon.ico
+[13/Jan/2025 20:08:26] "GET /favicon.ico HTTP/1.1" 404 7488
+[13/Jan/2025 20:08:27] code 505, message Invalid HTTP version (2.0)
+[13/Jan/2025 20:08:27] "PRI * HTTP/2.0" 505 -
