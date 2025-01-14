@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SACAS - Smart Academic Class Allocation System</title>
+    <title>SACAS - Smart Access Control and Attendance System</title>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -11,6 +11,8 @@
             --accent-color: #3b82f6;
             --text-color: #1f2937;
             --light-bg: #f3f4f6;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
         }
 
         * {
@@ -30,9 +32,19 @@
         .header {
             background: var(--primary-color);
             color: white;
-            padding: 1rem;
+            padding: 2rem 1rem;
             text-align: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         .container {
@@ -55,6 +67,32 @@
             margin-bottom: 1rem;
         }
 
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
         .api-endpoints {
             background: white;
             border-radius: 12px;
@@ -72,9 +110,14 @@
 
         .endpoint-item {
             background: var(--light-bg);
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 8px;
             border-left: 4px solid var(--accent-color);
+            transition: transform 0.2s;
+        }
+
+        .endpoint-item:hover {
+            transform: translateY(-2px);
         }
 
         .status {
@@ -83,7 +126,7 @@
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
-            background: #10B981;
+            background: var(--success-color);
             color: white;
             margin-bottom: 1rem;
         }
@@ -100,20 +143,67 @@
             .endpoint-list {
                 grid-template-columns: 1fr;
             }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .sub-endpoint {
+            font-size: 0.85rem;
+            color: #6B7280;
+            margin-top: 0.25rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid var(--accent-color);
+        }
+
+        .endpoint-item {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.2s;
+        }
+
+        .endpoint-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .endpoint-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .endpoint-item p {
+            margin: 0.25rem 0;
         }
     </style>
 </head>
 <body>
     <header class="header">
         <h1>SACAS Backend Server</h1>
-        <p>Smart Academic Class Allocation System</p>
+        <p>Smart Access Control and Attendance System</p>
     </header>
 
     <div class="container">
         <div class="welcome-card">
             <span class="status">Active</span>
             <h2>Welcome to SACAS API</h2>
-            <p>This is the backend server for the Smart Academic Class Allocation System. The server provides RESTful API endpoints for managing academic resources, timetables, and class allocations.</p>
+            <p>This is the backend server for the Smart Access Control and Attendance System. The server provides RESTful API endpoints for managing access control, attendance tracking, and system administration.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Requests</h3>
+                    <div class="number">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Users</h3>
+                    <div class="number">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Sessions</h3>
+                    <div class="number">0</div>
+                </div>
+            </div>
         </div>
 
         <div class="api-endpoints">
@@ -126,37 +216,49 @@
                 <li class="endpoint-item">
                     <h3>Modules</h3>
                     <p>/api/modules/</p>
+                    <p class="sub-endpoint">/api/modules/upload/</p>
                 </li>
                 <li class="endpoint-item">
                     <h3>Rooms</h3>
                     <p>/api/rooms/</p>
+                    <p class="sub-endpoint">/api/rooms/upload/</p>
                 </li>
                 <li class="endpoint-item">
                     <h3>Staff</h3>
                     <p>/api/staff/</p>
+                    <p class="sub-endpoint">/api/staff/upload/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Classes</h3>
+                    <p>/api/classes/</p>
+                    <p class="sub-endpoint">/api/classes/upload/</p>
                 </li>
                 <li class="endpoint-item">
                     <h3>Timetables</h3>
                     <p>/api/timetables/</p>
+                    <p class="sub-endpoint">/api/timetables/generate/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Teacher Preferences</h3>
+                    <p>/api/teacher-preferences/</p>
+                    <p class="sub-endpoint">/api/teacher-preferences/bulk/</p>
                 </li>
                 <li class="endpoint-item">
                     <h3>Conflicts</h3>
                     <p>/api/conflicts/</p>
+                    <p class="sub-endpoint">/api/conflicts/by-type/</p>
                 </li>
                 <li class="endpoint-item">
-                    <h3>Class Allocations</h3>
-                    <p>/api/class-module-allocations/</p>
-                </li>
-                <li class="endpoint-item">
-                    <h3>Documentation</h3>
-                    <p>/api/docs/</p>
+                    <h3>Module Allocations</h3>
+                    <p>/api/module-allocations/</p>
+                    <p class="sub-endpoint">/api/module-allocations/bulk/</p>
                 </li>
             </ul>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2024 SACAS - Smart Academic Class Allocation System. All rights reserved.</p>
+        <p>&copy; 2024 SACAS - Smart Access Control and Attendance System. All rights reserved.</p>
     </footer>
 </body>
 </html>
