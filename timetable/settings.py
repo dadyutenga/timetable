@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-gd7-yw&789zrpcszgivxk5to^yy&&a1_j6knx$6+h(#^t+uxtk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','31.220.82.177','localhost' ]
+ALLOWED_HOSTS = ['31.220.82.177','localhost' ]
 
 
 # Application definition
@@ -57,7 +57,9 @@ ROOT_URLCONF = 'timetable.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'timetablegen/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,8 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSRF_TRUSTED_ORIGINS = ['http://192.168.3.35']
+CSRF_TRUSTED_ORIGINS = ['http://31.220.82.177']
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
+FRONTEND_URL = 'http://31.220.82.177:3000'

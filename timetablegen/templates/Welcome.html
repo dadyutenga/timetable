@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SACAS - Smart Academic Class Allocation System</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex-grow: 1;
+        }
+
+        .welcome-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .welcome-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .api-endpoints {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .endpoint-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .endpoint-item {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: #10B981;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .endpoint-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>SACAS Backend Server</h1>
+        <p>Smart Academic Class Allocation System</p>
+    </header>
+
+    <div class="container">
+        <div class="welcome-card">
+            <span class="status">Active</span>
+            <h2>Welcome to SACAS API</h2>
+            <p>This is the backend server for the Smart Academic Class Allocation System. The server provides RESTful API endpoints for managing academic resources, timetables, and class allocations.</p>
+        </div>
+
+        <div class="api-endpoints">
+            <h2>Available API Endpoints</h2>
+            <ul class="endpoint-list">
+                <li class="endpoint-item">
+                    <h3>Departments</h3>
+                    <p>/api/departments/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Modules</h3>
+                    <p>/api/modules/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Rooms</h3>
+                    <p>/api/rooms/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Staff</h3>
+                    <p>/api/staff/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Timetables</h3>
+                    <p>/api/timetables/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Conflicts</h3>
+                    <p>/api/conflicts/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Class Allocations</h3>
+                    <p>/api/class-module-allocations/</p>
+                </li>
+                <li class="endpoint-item">
+                    <h3>Documentation</h3>
+                    <p>/api/docs/</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 SACAS - Smart Academic Class Allocation System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

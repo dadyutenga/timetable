@@ -16,6 +16,8 @@ from django.core.exceptions import ValidationError
 from .serializers import *
 from .models import *
 from .generator import TimetableGenerator
+from django.db.models import Count, Q
+from datetime import datetime
 
 def validate_file_size(value):
     limit = 25 * 1024 * 1024  # 25 MB
@@ -277,32 +279,43 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     serializer_class = DepartmentSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=False, methods=['post'])
-    def upload_csv(self, request):
-        try:
-            # CSV upload logic here
-            return Response({'message': 'Departments imported successfully'})
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    @action(detail=False, methods=['get'])
+    def stats(self, request):
+        """Get department statistics including staff and program counts"""
+        stats = self.queryset.annotate(
+            staff_count=Count('staff'),
+            program_count=Count('programs')
+        ).values('dept_id', 'dept_name', 'staff_count', 'program_count')
+        return Response(stats)
+
+    @action(detail=True, methods=['get'])
+    def staff_list(self, request, pk=None):
+        """Get all staff members in a department"""
+        department = self.get_object()
+        staff = department.staff.all()
+        serializer = StaffSerializer(staff, many=True)
+        return Response(serializer.data)
 
 class ModuleViewSet(viewsets.ModelViewSet):
     queryset = Module.objects.all()
     serializer_class = ModuleSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=False, methods=['post'])
-    def upload_csv(self, request):
-        try:
-            # CSV upload logic here
-            return Response({'message': 'Modules imported successfully'})
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
     @action(detail=False, methods=['get'])
-    def by_program(self, request):
-        program_id = request.query_params.get('program_id')
-        modules = self.queryset.filter(program_id=program_id)
+    def by_semester(self, request):
+        """Get modules grouped by semester"""
+        semester = request.query_params.get('semester')
+        modules = self.queryset.filter(semester=semester)
         serializer = self.serializer_class(modules, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def allocated_staff(self, request, pk=None):
+        """Get staff members allocated to this module"""
+        module = self.get_object()
+        allocations = module.class_allocations.select_related('staff_id')
+        staff = [alloc.staff_id for alloc in allocations]
+        serializer = StaffSerializer(staff, many=True)
         return Response(serializer.data)
 
 class RoomViewSet(viewsets.ModelViewSet):
@@ -310,26 +323,43 @@ class RoomViewSet(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=False, methods=['post'])
-    def upload_csv(self, request):
-        try:
-            # CSV upload logic here
-            return Response({'message': 'Rooms imported successfully'})
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    @action(detail=False, methods=['get'])
+    def available(self, request):
+        """Get available rooms for a specific time slot"""
+        day = request.query_params.get('day')
+        start_time = request.query_params.get('start_time')
+        end_time = request.query_params.get('end_time')
+
+        occupied_rooms = Timetable.objects.filter(
+            day_of_week=day,
+            start_time__lt=end_time,
+            end_time__gt=start_time
+        ).values_list('room_id', flat=True)
+
+        available_rooms = self.queryset.exclude(room_id__in=occupied_rooms)
+        serializer = self.serializer_class(available_rooms, many=True)
+        return Response(serializer.data)
 
 class StaffViewSet(viewsets.ModelViewSet):
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=False, methods=['post'])
-    def upload_csv(self, request):
-        try:
-            # CSV upload logic here
-            return Response({'message': 'Staff imported successfully'})
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    @action(detail=True, methods=['get'])
+    def schedule(self, request, pk=None):
+        """Get staff member's teaching schedule"""
+        staff = self.get_object()
+        timetable = Timetable.objects.filter(staff_id=staff)
+        serializer = TimetableSerializer(timetable, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def preferences(self, request, pk=None):
+        """Get staff teaching preferences"""
+        staff = self.get_object()
+        preferences = staff.preferences.all()
+        serializer = TeacherPreferenceSerializer(preferences, many=True)
+        return Response(serializer.data)
 
 class ProgramViewSet(viewsets.ModelViewSet):
     queryset = Program.objects.all()
@@ -354,17 +384,30 @@ class TimetableViewSet(viewsets.ModelViewSet):
     serializer_class = TimetableSerializer
     permission_classes = [IsAuthenticated]
 
+    @action(detail=False, methods=['get'])
+    def by_class(self, request):
+        """Get timetable for a specific class"""
+        class_id = request.query_params.get('class_id')
+        timetable = self.queryset.filter(class_id=class_id)
+        serializer = self.serializer_class(timetable, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def by_room(self, request):
+        """Get timetable for a specific room"""
+        room_id = request.query_params.get('room_id')
+        timetable = self.queryset.filter(room_id=room_id)
+        serializer = self.serializer_class(timetable, many=True)
+        return Response(serializer.data)
+
     @action(detail=False, methods=['post'])
-    def generate(self, request):
-        try:
-            generator = TimetableGenerator()
-            result = generator.generate_timetable()
-            return Response({
-                'message': 'Timetable generated successfully',
-                'data': result
-            })
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    def bulk_update(self, request):
+        """Bulk update timetable entries"""
+        serializer = self.serializer_class(data=request.data, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TeacherPreferenceViewSet(viewsets.ModelViewSet):
     queryset = TeacherPreference.objects.all()
@@ -387,10 +430,21 @@ class ConflictViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     @action(detail=False, methods=['get'])
-    def by_type(self, request):
-        conflict_type = request.query_params.get('type')
-        conflicts = self.queryset.filter(conflict_type=conflict_type)
+    def unresolved(self, request):
+        """Get all unresolved conflicts"""
+        conflicts = self.queryset.filter(resolved=False)
         serializer = self.serializer_class(conflicts, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post'])
+    def resolve(self, request, pk=None):
+        """Mark a conflict as resolved"""
+        conflict = self.get_object()
+        conflict.resolved = True
+        conflict.resolution_date = datetime.now()
+        conflict.resolution_notes = request.data.get('notes', '')
+        conflict.save()
+        serializer = self.serializer_class(conflict)
         return Response(serializer.data)
 
 class ClassModuleAllocationViewSet(viewsets.ModelViewSet):
@@ -398,12 +452,19 @@ class ClassModuleAllocationViewSet(viewsets.ModelViewSet):
     serializer_class = ClassModuleAllocationSerializer
     permission_classes = [IsAuthenticated]
 
+    @action(detail=False, methods=['get'])
+    def by_program(self, request):
+        """Get allocations for a specific program"""
+        program_id = request.query_params.get('program_id')
+        allocations = self.queryset.filter(program_id=program_id)
+        serializer = self.serializer_class(allocations, many=True)
+        return Response(serializer.data)
+
     @action(detail=False, methods=['post'])
-    def bulk_create(self, request):
-        try:
-            serializer = self.get_serializer(data=request.data, many=True)
-            serializer.is_valid(raise_exception=True)
-            self.perform_create(serializer)
-            return Response({'message': 'Allocations created successfully'})
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    def bulk_allocate(self, request):
+        """Bulk create module allocations"""
+        serializer = self.serializer_class(data=request.data, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
